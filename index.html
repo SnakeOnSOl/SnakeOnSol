@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>$SnakeGame on SOL</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <h1>$SnakeGame on SOL</h1>
+    <div id="top-links">
+      <a href="https://x.com/snakegamesol" target="_blank">
+        <img src="assets/twitter.png" alt="Twitter" class="social-icon" />
+      </a>
+      <a href="https://t.me/+to3HyLympj8yZWMx" target="_blank">
+        <img src="assets/telegram.png" alt="Telegram" class="social-icon" />
+      </a>
+      <a href="#" id="buy-now" class="button">Buy Now</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div id="main-content">
+    <div id="leaderboard">
+      <h2>Leaderboard</h2>
+      <ul></ul>
+    </div>
+
+    <div id="game-container">
+      <div id="start-prompt" class="hidden">Press WASD to Start</div>
+      <canvas id="gameCanvas" width="400" height="400"></canvas>
+      <div id="game-over" class="hidden">
+        <p>Game Over!</p>
+        <form id="scoreForm">
+          <input type="text" id="playerName" placeholder="Username" required />
+          <input type="text" id="walletAddress" placeholder="Solana wallet address" />
+          <button type="submit">Submit Score</button>
+        </form>
+      </div>      
+      <button id="restartGame" class="hidden">Restart Game</button>
+    </div>
+
+    <!-- Snakes of the Month Section -->
+    <div id="snakes-of-the-month">
+      <h2>
+        <img src="assets/fbi.png" alt="FBI Icon" class="fbi-icon" />
+        Snakes of the month
+      </h2>
+      <ul></ul>
+    </div>    
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

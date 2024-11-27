@@ -1,0 +1,344 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('assets/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden; /* Prevent scrolling */
+}
+
+/* Header Section */
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: black;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.6);
+}
+
+/* Top Links */
+#top-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.social-icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.social-icon:hover {
+    transform: scale(1.1);
+}
+
+#buy-now {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #9945FF;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#buy-now:hover {
+    background-color: #14F195;
+}
+
+/* Main Content */
+#main-content {
+    display: flex;
+    justify-content: center; /* Centers everything horizontally */
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 100px); /* Full height minus header */
+    gap: 50px; /* Space between leaderboard and game canvas */
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+/* Leaderboard */
+#leaderboard {
+    width: 250px;
+    background: linear-gradient(135deg, #9945FF, #14F195); /* Solana gradient */
+    color: white; /* Contrast against the gradient background */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    font-family: Arial, sans-serif;
+    position: relative; /* Allow flexibility in placement */
+    top: -20px; /* Slightly move it upwards for aesthetics */
+    text-align: center;
+  }
+  
+  #leaderboard h2 {
+    margin: 0 0 15px 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  }
+  
+  #leaderboard ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  #leaderboard li {
+    font-size: 1.2rem;
+    padding: 10px;
+    margin: 5px 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, background-color 0.2s;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  
+  
+  #leaderboard li:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    cursor: pointer;
+  }
+
+  #scoreForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  #scoreForm input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  #scoreForm button {
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #9945FF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #scoreForm button:hover {
+    background-color: #14F195;
+  }
+  
+
+/* Game Container */
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 400px; /* Fixed width for game canvas */
+}
+
+/* Snakes of the Month Section */
+#snakes-of-the-month {
+    width: 300px; /* Reduced width */
+    background: url('assets/graph.png') no-repeat center center; /* Use graph.png */
+    background-size: cover; /* Ensure the background covers the container */
+    color: white;
+    padding: 40px; /* Increased padding for better vertical spacing */
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    font-family: Arial, sans-serif;
+    text-align: center;
+    position: relative;
+    margin: 20px 0; /* Add spacing from other sections */
+    height: auto; /* Ensure it grows dynamically based on content */
+}
+
+#snakes-of-the-month h2 {
+    margin: 0 0 25px 0; /* Space below the header */
+    font-size: 1.8rem; /* Slightly smaller font for narrower width */
+    font-weight: bold;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Space between the FBI icon and text */
+}
+
+.fbi-icon {
+    width: 60px; /* Smaller FBI icon for narrower width */
+    height: 60px;
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.3)); /* Adds depth */
+}
+
+#snakes-of-the-month ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    gap: 20px; /* Increased gap for taller appearance */
+}
+
+.snake-item {
+    display: flex;
+    align-items: center; /* Align items (image, name, button) vertically */
+    justify-content: flex-start; /* Align items to the left */
+    padding: 20px; /* Increased padding for taller items */
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    transition: transform 0.2s, background-color 0.2s;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.snake-item:hover {
+    background: rgba(255, 255, 255, 0.3); /* Highlight on hover */
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+
+.snake-image {
+    width: 50px; /* Size of the image */
+    height: 50px;
+    border-radius: 50%; /* Circular image */
+    margin-right: 15px; /* Space between image and text */
+    border: 2px solid white; /* Border for better visibility */
+    flex-shrink: 0; /* Prevent image from resizing */
+}
+
+.snake-details {
+    display: flex;
+    align-items: center; /* Align name and vote button vertically */
+    justify-content: space-between; /* Space between name and button */
+    flex: 1; /* Allow the details section to grow */
+    gap: 10px; /* Space between name and vote button */
+}
+
+.snake-name {
+    font-size: 1.2rem; /* Font size for the name */
+    text-align: left; /* Align name to the left */
+    flex: 2; /* Allow more space for the name */
+}
+
+.vote-button {
+    padding: 10px 15px; /* Slightly larger button size */
+    font-size: 1rem; /* Increased font size */
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: bold;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0; /* Prevent the button from shrinking */
+}
+
+.vote-button:hover {
+    background-color: #ff6b6b;
+}
+
+
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+canvas {
+    border-radius: 12px; /* Add rounded corners */
+    border: 6px solid transparent; /* Transparent border for gradient effect */
+    background-clip: padding-box; /* Ensures gradient does not affect canvas */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Adds a subtle shadow */
+    position: relative; /* Ensure proper stacking */
+    z-index: 1; /* Layer it above other elements if needed */
+}
+
+/* Add gradient border using pseudo-element */
+canvas:before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    width: calc(100% + 12px);
+    height: calc(100% + 12px);
+    background: linear-gradient(45deg, #9945FF, #14F195); /* Solana gradient */
+    border-radius: 16px; /* Matches the canvas border-radius */
+    z-index: -1; /* Places gradient behind the canvas */
+    pointer-events: none; /* Prevents interference with the canvas */
+}
+
+
+#game-over {
+    margin-top: 10px;
+    font-size: 1.5rem;
+    color: red;
+    text-align: center;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Flashing Start Prompt */
+#start-prompt {
+    font-size: 2rem;
+    font-weight: bold;
+    color: red;
+    text-shadow: 2px 2px 5px black;
+    text-align: center;
+    animation: flash 1s infinite; /* Flashes the text */
+    margin-bottom: 20px; /* Adds spacing above the canvas */
+  }
+  
+  @keyframes flash {
+    0%, 50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+
+
+
+.hidden {
+    display: none;
+}
