@@ -40,6 +40,10 @@ let direction = null;
 // Declare game as a global variable
 let game = null; // Ensure it's defined globally
 
+// Add these variables at the top with your other game variables
+let backgroundIntensity = 0;
+const maxIntensity = 0.5; // Maximum darkness/redness intensity
+
 // Prevent scrolling when using arrow keys or WASD
 window.addEventListener("keydown", event => {
   if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) {
@@ -78,32 +82,101 @@ function resetGame() {
     y: Math.floor(Math.random() * 20) * box
   };
   score = 0;
+  // Update score display when resetting
+  document.getElementById("current-score").textContent = `Score: ${score}`;
   direction = null;
   gameStarted = false; // Reset the gameStarted flag
   game = null; // Reset the interval reference
+  backgroundIntensity = 0;
+  particles.length = 0; // Clear particles
 }
 
 // Draw Function (Unchanged, for reference)
 function draw() {
-  ctx.fillStyle = "black";
+  // Calculate background intensity based on score
+  backgroundIntensity = Math.min(score / 30, maxIntensity); // Increases until score of 30
+  
+  // Create dynamic background color
+  const redComponent = Math.floor(backgroundIntensity * 80); // Subtle red tint
+  const darkenAmount = Math.floor(backgroundIntensity * 20);
+  
+  // Set canvas background with dynamic color
+  ctx.fillStyle = `rgb(${darkenAmount}, 0, ${darkenAmount})`;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Draw the snake
+  // Add dynamic grid effect
+  ctx.strokeStyle = `rgba(153, 69, 255, ${0.1 + backgroundIntensity * 0.2})`; // Grid gets more visible
+  ctx.lineWidth = 0.5;
+  for (let i = 0; i < canvas.width; i += box) {
+    ctx.beginPath();
+    ctx.moveTo(i, 0);
+    ctx.lineTo(i, canvas.height);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(0, i);
+    ctx.lineTo(canvas.width, i);
+    ctx.stroke();
+  }
+
+  // Add pulsing glow effect to the background
+  if (score > 0) {
+    const pulseIntensity = Math.sin(Date.now() / 1000) * 0.1 * backgroundIntensity;
+    ctx.fillStyle = `rgba(153, 69, 255, ${pulseIntensity})`;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+
+  // Add particle effects as score increases
+  if (score > 5) {
+    drawParticles();
+  }
+
+  // Draw the snake with enhanced styling
   snake.forEach((part, index) => {
+    // Create gradient for snake parts
     const gradient = ctx.createLinearGradient(part.x, part.y, part.x + box, part.y + box);
-    if (index === 0) {
+    
+    if (index === 0) { // Head
       gradient.addColorStop(0, "#9945FF");
       gradient.addColorStop(1, "#14F195");
-    } else {
+      
+      // Draw the main body
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.roundRect(part.x, part.y, box, box, 5);
+      ctx.fill();
+      
+      // Add glow effect
+      ctx.shadowColor = "#9945FF";
+      ctx.shadowBlur = 15;
+      ctx.strokeStyle = "#9945FF";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    } else { // Body parts
       gradient.addColorStop(0, "#14F195");
       gradient.addColorStop(1, "#9945FF");
+      
+      // Draw body segments with slight transparency
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.roundRect(part.x, part.y, box, box, 3);
+      ctx.fill();
+      
+      // Add subtle glow to body
+      ctx.shadowColor = "#14F195";
+      ctx.shadowBlur = 10;
+      ctx.strokeStyle = "rgba(20, 241, 149, 0.5)";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
     }
-    ctx.fillStyle = gradient;
-    ctx.fillRect(part.x, part.y, box, box);
   });
 
-  // Draw the food
+  // Draw the food (Solana logo) with glow effect
+  ctx.shadowColor = "#14F195";
+  ctx.shadowBlur = 20;
   ctx.drawImage(foodImage, food.x, food.y, box, box);
+  ctx.shadowBlur = 0;
 
   // Move the snake
   const head = { ...snake[0] };
@@ -115,6 +188,8 @@ function draw() {
   // Check for collision with food
   if (head.x === food.x && head.y === food.y) {
     score++;
+    // Update score display
+    document.getElementById("current-score").textContent = `Score: ${score}`;
     food = {
       x: Math.floor(Math.random() * 20) * box,
       y: Math.floor(Math.random() * 20) * box
@@ -433,3 +508,36 @@ game = setInterval(draw, 100);
 
 // Initialize Snakes of the Month leaderboard
 fetchSnakesOfTheMonth();
+
+// Add particle system
+const particles = [];
+
+function drawParticles() {
+    // Create new particles based on score
+    if (Math.random() < backgroundIntensity * 0.3) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: canvas.height,
+            size: Math.random() * 3 + 1,
+            speedY: -(Math.random() * 2 + 1)
+        });
+    }
+
+    // Update and draw particles
+    for (let i = particles.length - 1; i >= 0; i--) {
+        const particle = particles[i];
+        particle.y += particle.speedY;
+        
+        // Remove particles that are off screen
+        if (particle.y < 0) {
+            particles.splice(i, 1);
+            continue;
+        }
+
+        // Draw particle
+        ctx.fillStyle = `rgba(153, 69, 255, ${backgroundIntensity})`;
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}

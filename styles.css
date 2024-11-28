@@ -22,13 +22,21 @@ header {
     align-items: center;
     padding: 10px 20px;
     box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    border-bottom: 2px solid #9945FF; /* Purple border */
+    box-shadow: 0 0 10px rgba(153, 69, 255, 0.3); /* Subtle purple glow */
 }
 
 h1 {
     margin: 0;
-    font-size: 2.5rem;
-    color: black;
-    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.6);
+    font-size: 2.2rem;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    color: #14F195; /* Neon green */
+    text-shadow: 
+        0 0 10px #14F195,    /* Inner green glow */
+        0 0 20px #14F195,    /* Outer green glow */
+        2px 2px 2px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
 }
 
 /* Top Links */
@@ -51,20 +59,31 @@ h1 {
 
 #buy-now {
     padding: 10px 20px;
-    font-size: 16px;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 0.9rem;
     font-weight: bold;
     text-decoration: none;
     background-color: #9945FF;
     color: white;
-    border-radius: 5px;
-    border: none;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    border: 2px solid #9945FF;
+    box-shadow: 
+        0 0 10px #9945FF,    /* Outer purple glow */
+        inset 0 0 5px #9945FF; /* Inner purple glow */
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    letter-spacing: 1px;
 }
 
 #buy-now:hover {
     background-color: #14F195;
+    border-color: #14F195;
+    transform: translateY(-2px);
+    box-shadow: 
+        0 0 15px #14F195,    /* Outer green glow */
+        inset 0 0 10px #14F195; /* Inner green glow */
+    text-shadow: 0 0 5px #ffffff;
 }
 
 /* Main Content */
@@ -82,77 +101,129 @@ h1 {
 /* Leaderboard */
 #leaderboard {
     width: 250px;
-    background: linear-gradient(135deg, #9945FF, #14F195); /* Solana gradient */
-    color: white; /* Contrast against the gradient background */
+    background: rgba(0, 0, 0, 0.6); /* Match score counter background */
+    color: #14F195; /* Neon green text */
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    font-family: Arial, sans-serif;
-    position: relative; /* Allow flexibility in placement */
-    top: -20px; /* Slightly move it upwards for aesthetics */
+    box-shadow: 
+        0 0 10px #9945FF,    /* Purple glow */
+        inset 0 0 10px #9945FF; /* Inner glow */
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    position: relative;
+    border: 2px solid #9945FF;
     text-align: center;
-  }
-  
-  #leaderboard h2 {
+}
+
+#leaderboard h2 {
     margin: 0 0 15px 0;
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     font-weight: bold;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-  }
-  
-  #leaderboard ul {
+    text-shadow: 
+        0 0 10px #14F195,
+        0 0 20px #14F195,
+        2px 2px 2px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+}
+
+#leaderboard ul {
     list-style: none;
     margin: 0;
     padding: 0;
-  }
+}
 
-  #leaderboard li {
-    font-size: 1.2rem;
-    padding: 10px;
-    margin: 5px 0;
-    background: rgba(255, 255, 255, 0.2);
+#leaderboard li {
+    font-size: 0.8rem; /* Smaller font size due to pixel font */
+    padding: 15px 10px;
+    margin: 8px 0;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s, background-color 0.2s;
+    border: 1px solid #9945FF;
+    box-shadow: 
+        0 0 5px #9945FF,
+        inset 0 0 5px #9945FF;
+    transition: all 0.3s ease;
     animation: fadeIn 0.5s ease-in-out;
-  }
+    letter-spacing: 1px;
+}
 
-  
-  
-  #leaderboard li:hover {
-    background: rgba(255, 255, 255, 0.3);
+#leaderboard li:hover {
+    background: rgba(153, 69, 255, 0.2);
     transform: translateY(-2px);
     cursor: pointer;
-  }
+    box-shadow: 
+        0 0 15px #9945FF,
+        inset 0 0 10px #9945FF;
+}
 
-  #scoreForm {
+#scoreForm {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-  }
-  
-  #scoreForm input {
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  #scoreForm button {
-    padding: 10px;
-    font-size: 1rem;
+    gap: 15px;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+#scoreForm input {
+    padding: 12px;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #9945FF;
+    border-radius: 6px;
+    color: #14F195;
+    box-shadow: 
+        0 0 5px #9945FF,
+        inset 0 0 5px #9945FF;
+    transition: all 0.3s ease;
+}
+
+#scoreForm input:focus {
+    outline: none;
+    border-color: #14F195;
+    box-shadow: 
+        0 0 10px #14F195,
+        inset 0 0 10px #14F195;
+}
+
+#scoreForm input::placeholder {
+    color: rgba(153, 69, 255, 0.6);
+}
+
+#scoreForm button {
+    padding: 12px 20px;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 0.9rem;
     background-color: #9945FF;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  #scoreForm button:hover {
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(153, 69, 255, 0.5);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+#scoreForm button:hover {
     background-color: #14F195;
-  }
-  
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(20, 241, 149, 0.5);
+}
+
+#current-score {
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 1rem;
+    color: #14F195;
+    text-shadow: 0 0 10px #14F195;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 2px solid #9945FF;
+    box-shadow: 
+        0 0 10px #9945FF,
+        inset 0 0 10px #9945FF;
+    margin-top: 10px; /* Ensure there's space between the canvas and score */
+    text-align: center; /* Center the text */
+}
 
 /* Game Container */
 #game-container {
@@ -165,35 +236,40 @@ h1 {
 
 /* Snakes of the Month Section */
 #snakes-of-the-month {
-    width: 300px; /* Reduced width */
-    background: url('assets/graph.png') no-repeat center center; /* Use graph.png */
-    background-size: cover; /* Ensure the background covers the container */
-    color: white;
-    padding: 40px; /* Increased padding for better vertical spacing */
+    width: 250px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #14F195;
+    padding: 20px;
     border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
-    font-family: Arial, sans-serif;
-    text-align: center;
+    box-shadow: 
+        0 0 10px #9945FF,
+        inset 0 0 10px #9945FF;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
     position: relative;
-    margin: 20px 0; /* Add spacing from other sections */
-    height: auto; /* Ensure it grows dynamically based on content */
+    border: 2px solid #9945FF;
+    text-align: center;
 }
 
 #snakes-of-the-month h2 {
-    margin: 0 0 25px 0; /* Space below the header */
-    font-size: 1.8rem; /* Slightly smaller font for narrower width */
+    margin: 0 0 20px 0;
+    font-size: 1.2rem;
     font-weight: bold;
-    color: white;
+    color: #14F195;
+    text-shadow: 
+        0 0 10px #14F195,
+        0 0 20px #14F195,
+        2px 2px 2px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px; /* Space between the FBI icon and text */
+    gap: 10px;
 }
 
 .fbi-icon {
-    width: 60px; /* Smaller FBI icon for narrower width */
-    height: 60px;
-    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.3)); /* Adds depth */
+    width: 30px;
+    height: 30px;
+    filter: brightness(0) saturate(100%) invert(89%) sepia(12%) saturate(2279%) hue-rotate(86deg) brightness(99%) contrast(94%);
 }
 
 #snakes-of-the-month ul {
@@ -201,70 +277,76 @@ h1 {
     padding: 0;
     margin: 0;
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    gap: 20px; /* Increased gap for taller appearance */
+    flex-direction: column;
+    gap: 10px;
 }
 
 .snake-item {
     display: flex;
-    align-items: center; /* Align items (image, name, button) vertically */
-    justify-content: flex-start; /* Align items to the left */
-    padding: 20px; /* Increased padding for taller items */
-    background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+    align-items: center;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-    transition: transform 0.2s, background-color 0.2s;
+    border: 1px solid #9945FF;
+    box-shadow: 
+        0 0 5px #9945FF,
+        inset 0 0 5px #9945FF;
+    transition: all 0.3s ease;
     animation: fadeIn 0.5s ease-in-out;
 }
 
 .snake-item:hover {
-    background: rgba(255, 255, 255, 0.3); /* Highlight on hover */
+    background: rgba(153, 69, 255, 0.2);
     transform: translateY(-2px);
     cursor: pointer;
+    box-shadow: 
+        0 0 15px #9945FF,
+        inset 0 0 10px #9945FF;
 }
 
 .snake-image {
-    width: 50px; /* Size of the image */
-    height: 50px;
-    border-radius: 50%; /* Circular image */
-    margin-right: 15px; /* Space between image and text */
-    border: 2px solid white; /* Border for better visibility */
-    flex-shrink: 0; /* Prevent image from resizing */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid #9945FF;
+    box-shadow: 0 0 5px #9945FF;
 }
 
 .snake-details {
+    flex: 1;
     display: flex;
-    align-items: center; /* Align name and vote button vertically */
-    justify-content: space-between; /* Space between name and button */
-    flex: 1; /* Allow the details section to grow */
-    gap: 10px; /* Space between name and vote button */
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
 }
 
 .snake-name {
-    font-size: 1.2rem; /* Font size for the name */
-    text-align: left; /* Align name to the left */
-    flex: 2; /* Allow more space for the name */
+    font-size: 0.7rem;
+    color: #14F195;
+    text-shadow: 0 0 5px #14F195;
+    text-align: left;
 }
 
 .vote-button {
-    padding: 10px 15px; /* Slightly larger button size */
-    font-size: 1rem; /* Increased font size */
-    background-color: #ff4757;
+    padding: 8px 12px;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 0.6rem;
+    background-color: #9945FF;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    font-weight: bold;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    flex-shrink: 0; /* Prevent the button from shrinking */
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px rgba(153, 69, 255, 0.5);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
 .vote-button:hover {
-    background-color: #ff6b6b;
+    background-color: #14F195;
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px rgba(20, 241, 149, 0.5);
 }
-
-
 
 /* Smooth fade-in animation */
 @keyframes fadeIn {
@@ -301,44 +383,133 @@ canvas:before {
     pointer-events: none; /* Prevents interference with the canvas */
 }
 
-
 #game-over {
-    margin-top: 10px;
-    font-size: 1.5rem;
-    color: red;
+    margin-top: 20px;
     text-align: center;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid #9945FF;
+    box-shadow: 
+        0 0 10px #9945FF,
+        inset 0 0 10px #9945FF;
 }
 
-button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
+#game-over p {
+    color: #14F195;
+    font-size: 1.5rem;
+    margin: 0 0 20px 0;
+    text-shadow: 
+        0 0 10px #14F195,
+        0 0 20px #14F195;
+    animation: pulse 2s infinite;
+}
+
+#restartGame {
+    margin-top: 15px;
+    padding: 12px 20px;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 0.9rem;
+    background-color: #14F195;
+    color: white;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(20, 241, 149, 0.5);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+#restartGame:hover {
+    background-color: #9945FF;
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(153, 69, 255, 0.5);
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
 }
 
 /* Flashing Start Prompt */
 #start-prompt {
-    font-size: 2rem;
-    font-weight: bold;
-    color: red;
-    text-shadow: 2px 2px 5px black;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 1.2rem;
+    color: #14F195; /* Neon green */
+    text-shadow: 
+        0 0 10px #14F195,    /* Inner green glow */
+        0 0 20px #14F195,    /* Outer green glow */
+        2px 2px 2px rgba(0, 0, 0, 0.5);
     text-align: center;
-    animation: flash 1s infinite; /* Flashes the text */
-    margin-bottom: 20px; /* Adds spacing above the canvas */
-  }
-  
-  @keyframes flash {
-    0%, 50% {
-      opacity: 1;
+    margin-bottom: 20px;
+    padding: 10px;
+    letter-spacing: 2px;
+    animation: pulse 1.5s infinite;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+    border: 2px solid #9945FF;
+    box-shadow: 
+        0 0 10px #9945FF,
+        inset 0 0 10px #9945FF;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+        text-shadow: 
+            0 0 10px #14F195,
+            0 0 20px #14F195,
+            2px 2px 2px rgba(0, 0, 0, 0.5);
+    }
+    50% {
+        opacity: 0.5;
+        text-shadow: 
+            0 0 20px #14F195,
+            0 0 30px #14F195,
+            2px 2px 2px rgba(0, 0, 0, 0.5);
     }
     100% {
-      opacity: 0;
+        opacity: 1;
+        text-shadow: 
+            0 0 10px #14F195,
+            0 0 20px #14F195,
+            2px 2px 2px rgba(0, 0, 0, 0.5);
     }
-  }
-
-
-
+}
 
 .hidden {
     display: none;
+}
+
+.reward-text {
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    color: #9945FF; /* Changed to Solana purple */
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    text-shadow: 
+        0 0 10px #9945FF,    /* Inner purple glow */
+        0 0 20px #9945FF;    /* Outer purple glow */
+    padding: 8px;
+    background: rgba(153, 69, 255, 0.1); /* Slight purple tint */
+    border-radius: 6px;
+    border: 1px solid #9945FF;
+    box-shadow: 
+        0 0 5px #9945FF,
+        inset 0 0 5px #9945FF;
+    letter-spacing: 1px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
 }

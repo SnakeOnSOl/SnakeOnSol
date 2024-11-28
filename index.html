@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>$SnakeGame on SOL</title>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Header Section -->
@@ -25,12 +26,14 @@
   <div id="main-content">
     <div id="leaderboard">
       <h2>Leaderboard</h2>
+      <div class="reward-text">Reward: 1 SOL</div>
       <ul></ul>
     </div>
 
     <div id="game-container">
       <div id="start-prompt" class="hidden">Press WASD to Start</div>
       <canvas id="gameCanvas" width="400" height="400"></canvas>
+      <div id="current-score">Score: 0</div>
       <div id="game-over" class="hidden">
         <p>Game Over!</p>
         <form id="scoreForm">
