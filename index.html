@@ -28,6 +28,28 @@
     </div>
   </header>
 
+  <!-- Add Rules Section right after header -->
+  <div class="rules-section">
+    <div class="rules-header">
+        Rules
+        <span class="dropdown-arrow">▼</span>
+    </div>
+    <div class="rules-content">
+        <ul class="rules-list">
+            <li>You must own $Snakegame coin to be eligible.</li>
+            <li>Submit your wallet address to receive any earnings.</li>
+            <li>Maintain the #1 spot on the leaderboard when the market cap reaches $100,000 to receive reward.</li>
+            <li>Leaderboard Reset and Increased Reward:
+                <ul class="sub-rules">
+                    <li>Reset: The leaderboard resets once the market cap reaches $100,000.</li>
+                    <li>Increased Reward: The reward increases to 10 SOL.</li>
+                    <li>New Goal: Hold the #1 spot on the leaderboard when the market cap reaches $1 million.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+  </div>
+
   <!-- Main Content -->
   <div id="main-content">
     <div id="leaderboard">
@@ -45,6 +67,7 @@
         <form id="scoreForm">
           <input type="text" id="playerName" placeholder="Username" required />
           <input type="text" id="walletAddress" placeholder="Solana wallet address" />
+          <div class="optional-text">optional</div>
           <button type="submit">Submit Score</button>
         </form>
       </div>      
@@ -53,10 +76,7 @@
 
     <!-- Snakes of the Month Section -->
     <div id="snakes-of-the-month">
-      <h2>
-        <img src="assets/fbi.png" alt="FBI Icon" class="fbi-icon" />
-        Snakes of the month
-      </h2>
+      <h2>JEETS of the month</h2>
       <ul></ul>
     </div>    
   </div>

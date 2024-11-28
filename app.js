@@ -265,7 +265,7 @@ function fetchLeaderboard() {
                 });
                 
                 leaderboard.sort((a, b) => b.score - a.score);
-                const top10 = leaderboard.slice(0, 10);
+                const top10 = leaderboard.slice(0, 8);
                 
                 const leaderboardList = document.querySelector("#leaderboard ul");
                 leaderboardList.innerHTML = "";
@@ -308,7 +308,7 @@ function fetchSnakesOfTheMonth() {
                 const listItem = document.createElement("li");
                 listItem.innerHTML = `
                     <img src="${snake.image}" alt="${snake.name}" class="snake-image" />
-                    <span>${snake.name} - ${snake.vote} votes</span>
+                    <span>${snake.name} ${snake.vote} votes</span>
                     <button data-snake="${snake.key}" class="vote-button">Vote</button>
                 `;
                 snakesList.appendChild(listItem);
@@ -575,4 +575,12 @@ async function updateMarketCap() {
 // Update initially and every 30 seconds
 updateMarketCap();
 setInterval(updateMarketCap, 30000);
+
+// Add event listener for rules dropdown
+document.querySelector('.rules-header').addEventListener('click', function() {
+    const content = document.querySelector('.rules-content');
+    content.classList.toggle('active');
+    const arrow = this.querySelector('.dropdown-arrow');
+    arrow.textContent = content.classList.contains('active') ? '▲' : '▼';
+});
 
