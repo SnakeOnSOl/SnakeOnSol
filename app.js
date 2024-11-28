@@ -93,6 +93,8 @@ function resetGame() {
 
 // Draw Function (Unchanged, for reference)
 function draw() {
+  if (!gameStarted) return; // Skip drawing until game actually starts
+  
   // Calculate background intensity based on score
   backgroundIntensity = Math.min(score / 30, maxIntensity); // Increases until score of 30
   
@@ -139,19 +141,48 @@ function draw() {
       gradient.addColorStop(0, "#9945FF");
       gradient.addColorStop(1, "#14F195");
       
-      // Draw the main body
+      // Draw the main head
       ctx.fillStyle = gradient;
       ctx.beginPath();
       ctx.roundRect(part.x, part.y, box, box, 5);
       ctx.fill();
       
-      // Add glow effect
+      // Add glow effect to head
       ctx.shadowColor = "#9945FF";
       ctx.shadowBlur = 15;
       ctx.strokeStyle = "#9945FF";
       ctx.lineWidth = 2;
       ctx.stroke();
+      
+      // Add eyes
+      ctx.shadowBlur = 5;
+      ctx.fillStyle = "#000";
+      let leftEye, rightEye;
+      
+      // Position eyes based on direction
+      if (direction === "RIGHT") {
+        leftEye = { x: part.x + box - 6, y: part.y + 5 };
+        rightEye = { x: part.x + box - 6, y: part.y + box - 8 };
+      } else if (direction === "LEFT") {
+        leftEye = { x: part.x + 4, y: part.y + 5 };
+        rightEye = { x: part.x + 4, y: part.y + box - 8 };
+      } else if (direction === "UP") {
+        leftEye = { x: part.x + 5, y: part.y + 4 };
+        rightEye = { x: part.x + box - 8, y: part.y + 4 };
+      } else if (direction === "DOWN") {
+        leftEye = { x: part.x + 5, y: part.y + box - 6 };
+        rightEye = { x: part.x + box - 8, y: part.y + box - 6 };
+      }
+      
+      // Draw eyes with glow
+      ctx.beginPath();
+      ctx.arc(leftEye.x, leftEye.y, 2, 0, Math.PI * 2);
+      ctx.arc(rightEye.x, rightEye.y, 2, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Reset shadow
       ctx.shadowBlur = 0;
+      
     } else { // Body parts
       gradient.addColorStop(0, "#14F195");
       gradient.addColorStop(1, "#9945FF");
@@ -213,8 +244,6 @@ function draw() {
 
   snake.unshift(head);
 }
-
-
 // Change Direction
 document.addEventListener("keydown", event => {
   if (event.key === "a" && direction !== "RIGHT") direction = "LEFT";
@@ -225,62 +254,43 @@ document.addEventListener("keydown", event => {
 
 // Fetch Leaderboard
 function fetchLeaderboard() {
-    console.log("Fetching leaderboard...");
-  
-    // Query Firebase for scores ordered by "score"
     const leaderboardRef = query(ref(db, "scores"), orderByChild("score"));
-  
+    
     get(leaderboardRef)
-      .then(snapshot => {
-        if (snapshot.exists()) {
-          console.log("Snapshot exists. Data fetched from Firebase:", snapshot.val());
-  
-          const leaderboard = [];
-  
-          // Push each entry into an array
-          snapshot.forEach(data => {
-            console.log("Fetched entry:", data.val()); // Debug: Log each entry
-            leaderboard.push(data.val());
-          });
-  
-          // Sort scores in descending order
-          leaderboard.sort((a, b) => b.score - a.score);
-          console.log("Sorted leaderboard:", leaderboard); // Debug: Log sorted leaderboard
-  
-          // Limit to top 10 scores
-          const top10 = leaderboard.slice(0, 10);
-          console.log("Top 10 leaderboard:", top10); // Debug: Log top 10 scores
-  
-          // Update the leaderboard UI
-          const leaderboardList = document.querySelector("#leaderboard ul");
-          leaderboardList.innerHTML = ""; // Clear old leaderboard
-          top10.forEach((entry, index) => {
-            const li = document.createElement("li");
-            li.textContent = `#${index + 1} ${entry.name}: ${entry.score}`;
-            li.style.animation = "fadeIn 0.5s ease-in-out";
-            leaderboardList.appendChild(li);
-            console.log(`Updated leaderboard item: #${index + 1} ${entry.name}: ${entry.score}`); // Debug: Log each updated item
-          });
-        } else {
-          console.log("No data found in Firebase for scores."); // Debug: Log if no scores exist
-          const leaderboardList = document.querySelector("#leaderboard ul");
-          leaderboardList.innerHTML = "<li>No scores yet.</li>";
-        }
-      })
-      .catch(error => {
-        console.error("Error fetching leaderboard data:", error); // Debug: Log Firebase errors
-      });
-  }
-  
-  function fetchSnakesOfTheMonth() {
-    console.log("Fetching Snakes of the Month...");
+        .then(snapshot => {
+            if (snapshot.exists()) {
+                const leaderboard = [];
+                snapshot.forEach(data => {
+                    leaderboard.push(data.val());
+                });
+                
+                leaderboard.sort((a, b) => b.score - a.score);
+                const top10 = leaderboard.slice(0, 10);
+                
+                const leaderboardList = document.querySelector("#leaderboard ul");
+                leaderboardList.innerHTML = "";
+                top10.forEach((entry, index) => {
+                    const li = document.createElement("li");
+                    li.textContent = `#${index + 1} ${entry.name}: ${entry.score}`;
+                    li.style.animation = "fadeIn 0.5s ease-in-out";
+                    leaderboardList.appendChild(li);
+                });
+            } else {
+                const leaderboardList = document.querySelector("#leaderboard ul");
+                leaderboardList.innerHTML = "<li>No scores yet.</li>";
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching leaderboard");
+        });
+}
+
+function fetchSnakesOfTheMonth() {
     const snakesRef = ref(db, "snake-month");
     
     onValue(snakesRef, (snapshot) => {
         if (snapshot.exists()) {
-            console.log("Data fetched from Firebase (Snakes of the Month):", snapshot.val());
             const snakesArray = [];
-
             snapshot.forEach((childSnapshot) => {
                 snakesArray.push({
                     key: childSnapshot.key,
@@ -288,17 +298,12 @@ function fetchLeaderboard() {
                 });
             });
 
-            // Sort snakes by votes in descending order
             snakesArray.sort((a, b) => b.vote - a.vote);
-            console.log("Sorted Snakes of the Month:", snakesArray);
-
-            // Update the UI
+            
             const snakesList = document.querySelector("#snakes-of-the-month ul");
-            if (!snakesList) {
-                console.error("#snakes-of-the-month ul not found in the DOM.");
-                return;
-            }
-            snakesList.innerHTML = ""; // Clear old list
+            if (!snakesList) return;
+            
+            snakesList.innerHTML = "";
             snakesArray.forEach((snake) => {
                 const listItem = document.createElement("li");
                 listItem.innerHTML = `
@@ -307,13 +312,10 @@ function fetchLeaderboard() {
                     <button data-snake="${snake.key}" class="vote-button">Vote</button>
                 `;
                 snakesList.appendChild(listItem);
-                console.log(`Added to UI: ${snake.name} with ${snake.vote} votes`);
             });
-        } else {
-            console.log("No data found in Firebase for Snakes of the Month.");
         }
     }, (error) => {
-        console.error("Error fetching Snakes of the Month data:", error);
+        console.error("Error fetching data");
     });
 }
 
@@ -541,3 +543,36 @@ function drawParticles() {
         ctx.fill();
     }
 }
+async function updateMarketCap() {
+    try {
+        const response = await fetch('https://api.dexscreener.com/latest/dex/pairs/solana/HGRvEZF83Hm2x5HoVx9ec2cBiAjTmWFHK6VCUPLH4yDY');
+        const data = await response.json();
+        
+        if (data.pairs && data.pairs[0]) {
+            const marketCap = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(data.pairs[0].marketCap);
+            
+            // Add price data as well
+            const price = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 8,
+                maximumFractionDigits: 8
+            }).format(data.pairs[0].priceUsd);
+
+            document.getElementById('marketcap-value').textContent = `${marketCap} | ${price}`;
+        }
+    } catch (error) {
+        console.error('Error fetching marketcap:', error);
+        document.getElementById('marketcap-value').textContent = 'Error';
+    }
+}
+
+// Update initially and every 30 seconds
+updateMarketCap();
+setInterval(updateMarketCap, 30000);
+
