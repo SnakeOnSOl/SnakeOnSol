@@ -783,36 +783,24 @@ canvas::before {
     }
 
     h1 {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         text-align: center;
-    }
-
-    /* Update mobile message */
-    body::after {
-        content: "Compatible with desktop and laptop computers";
-        display: block;
-        font-family: 'Press Start 2P', 'Courier New', monospace;
-        font-size: 0.8rem; /* Slightly smaller font */
+        margin: 0;
         color: #14F195;
-        text-align: center;
-        padding: 15px;
-        margin: 20px auto;
-        width: 90%;
-        background: rgba(0, 0, 0, 0.8);
-        border: 2px solid #9945FF;
-        border-radius: 8px;
-        box-shadow: 
-            0 0 10px #9945FF,
-            inset 0 0 10px #9945FF;
-        animation: fadeIn 0.5s ease-in-out;
+        text-shadow: 
+            0 0 5px rgba(20, 241, 149, 0.5),  /* Reduced glow */
+            1px 1px 1px rgba(0, 0, 0, 0.5);   /* Subtle shadow */
     }
 
-    /* Ensure message appears after leaderboard */
-    #main-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
+    /* Update leaderboard title glow */
+    #leaderboard h2 {
+        font-size: 1.2rem;
+        margin: 0 0 10px 0;
+        color: #14F195;
+        text-shadow: 
+            0 0 5px rgba(20, 241, 149, 0.5),  /* Reduced glow */
+            1px 1px 1px rgba(0, 0, 0, 0.5);   /* Subtle shadow */
+        letter-spacing: 1px;
     }
 
     /* Adjust rules section for mobile */
