@@ -548,8 +548,31 @@ function drawParticles() {
   }
 }
 async function updateMarketCap() {
-  try {
-    const response = await fetch('https://api.dexscreener.com/latest/dex/pairs/solana/HGRvEZF83Hm2x5HoVx9ec2cBiAjTmWFHK6VCUPLH4yDY');
+  //try { // uncomment when live
+
+ // PLACEHOLDER VERSION (Comment this out when coin launches)
+        
+        const marketCap = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }).format(0);
+
+        const price = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 8,
+            maximumFractionDigits: 8
+        }).format(0);
+
+        document.getElementById('marketcap-value').textContent = `${marketCap} | ${price}`;
+        
+      }//closed bracket for test version, delete when live
+        // LIVE VERSION (Uncomment this when coin launches)
+
+    
+    /*const response = await fetch('https://api.dexscreener.com/latest/dex/pairs/solana/HGRvEZF83Hm2x5HoVx9ec2cBiAjTmWFHK6VCUPLH4yDY');
     const data = await response.json();
 
     if (data.pairs && data.pairs[0]) {
@@ -573,8 +596,8 @@ async function updateMarketCap() {
   } catch (error) {
     console.error('Error fetching marketcap:', error);
     document.getElementById('marketcap-value').textContent = 'Error';
-  }
-}
+  }*/
+//}
 
 // Update initially and every 30 seconds
 updateMarketCap();
